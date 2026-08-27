@@ -3,18 +3,54 @@ generator client {
 }
 
 datasource db {
-    provider = "sqlite"
-    url = env("DATABASE_URL")
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
 }
 
 model cliente {
-    id Int @id @default(autoincrement())
-    nome String
-    email String @unique
-    cpf String @unique
-    telefone String @unique
+  id       Int    @id @default(autoincrement())
+  nome     String
+  email    String @unique
+  cpf      String @unique
+  telefone String @unique
 
-    criadoEm DateTime @default(now())
+  criadoEm DateTime @default(now())
 
-    @@map("clientes")
+  @@map("clientes")
+}
+
+model Animal {
+  id             Int      @id @default(autoincrement())
+  nome           String
+  raca           String
+  especie        String
+  datanascimento DateTime
+
+  @@map("animais")
+}
+
+model Veterinario {
+  id            Int    @id @default(autoincrement())
+  nome          String
+  crmv          String @unique
+  especialidade String
+  email         String @unique
+
+  @@map("veterinarios")
+}
+
+model Consulta {
+  id          Int      @id @default(autoincrement())
+  datahorario DateTime @unique
+  status      String
+
+  @@map("consultas")
+}
+
+model Prontuario {
+  id          Int    @id @default(autoincrement())
+  diagnostico String
+  prescricao  String
+
+  @@map("prontuarios")
 }
