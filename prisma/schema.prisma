@@ -26,6 +26,8 @@ model Animal {
   especie        String
   datanascimento DateTime
 
+    consultas Consulta[]
+
   @@map("animais")
 }
 
@@ -36,21 +38,46 @@ model Veterinario {
   especialidade String
   email         String @unique
 
+    consultas Consulta[]
+
   @@map("veterinarios")
 }
 
+model CategoriaConsulta {
+  id            Int      @id @default(autoincrement())
+  nomeCategoria String
+  valorConsulta Float
+
+  consultas Consulta[]
+
+  @@map("categorias_consultas")
+}
+
 model Consulta {
-  id          Int      @id @default(autoincrement())
-  datahorario DateTime @unique
-  status      String
+  id            Int      @id @default(autoincrement())
+  categoriaId   Int
+  animalId      Int
+  veterinarioId Int
+  dataHorario   DateTime
+  status        String   @default("Agendada")
+
+  categoria  CategoriaConsulta @relation(fields: [categoriaId], references: [id])
+  animal     Animal            @relation(fields: [animalId], references: [id])
+  veterinario Veterinario      @relation(fields: [veterinarioId], references: [id])
+
+  prontuario Prontuario?
 
   @@map("consultas")
 }
 
+
 model Prontuario {
   id          Int    @id @default(autoincrement())
+   consultaId  Int       @unique
   diagnostico String
   prescricao  String
 
+
+  consulta Consulta @relation(fields: [consultaId], references: [id], onDelete: Cascade)
   @@map("prontuarios")
 }

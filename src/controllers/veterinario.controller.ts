@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import * as veterinarioService from '../services/Veterinario.services';
+import * as veterinarioService from '../services/veterinario.services';
 
 export async function criar(req: Request, res: Response): Promise<void> {
   const { nome, crmv, especialidade, email } = req.body;

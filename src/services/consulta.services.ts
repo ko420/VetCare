@@ -1,30 +1,42 @@
 import { prisma } from '../config/prisma';
 import { AppError } from '../middlewares/error.middleware';
 
-const SELECT_CONSULTA_PUBLICO = {
-  id: true,
-  datahorario: true,
-  status: true,
-
-
-} as const;
-
 interface CriarConsultaInput {
-  datahorario: Date;
+   categoriaId: number;
+  dataHorario: Date;
   status: string;
+  veterinarioId: number;
+  animalId: number;
 }
+interface AtualizarConsultaInput {
+  dataHorario?: Date;
+  status?: string;
+  veterinarioId?: number;
+  animalId?: number;
+}
+
+
 export async function criarConsulta(dados: CriarConsultaInput) {
-   const consultaCriada = await prisma.consulta.create({
-        data: dados,
-        select: SELECT_CONSULTA_PUBLICO,
-    });
-    return consultaCriada;
+  const categoria  = await prisma.categoriaConsulta.findUnique({
+    where: { id: dados.categoriaId },
+  });
 
+  if (!categoria) {
+    throw new AppError('Categoria de consulta não encontrada.', 404);
+  }
+
+  const consulta = await prisma.consulta.create({
+    data: { ...dados, categoriaId: categoria.id },
+    include: { categoria: true },
+  });
+
+  return consulta;
 }
 
-export async function listarConsultas() {
+export async function listarConsultas(statusDisponibilidade?: string) {
   return prisma.consulta.findMany({
-    select: SELECT_CONSULTA_PUBLICO,
+    where: statusDisponibilidade ? { status: statusDisponibilidade } : undefined,
+    include: { categoria: true },
     orderBy: { id: 'asc' },
   });
 }
@@ -32,7 +44,7 @@ export async function listarConsultas() {
 export async function buscarConsultaPorId(id: number) {
   const consulta = await prisma.consulta.findUnique({
     where: { id },
-    select: SELECT_CONSULTA_PUBLICO,
+    include: { categoria: true },
   });
 
   if (!consulta) {
@@ -40,4 +52,14 @@ export async function buscarConsultaPorId(id: number) {
   }
 
   return consulta;
+}
+export async function atualizarConsulta(id: number, dados: AtualizarConsultaInput) {
+
+  await buscarConsultaPorId(id);
+
+  return prisma.consulta.update({
+    where: { id },
+    data: dados,
+    include: { categoria: true },
+  });
 }
