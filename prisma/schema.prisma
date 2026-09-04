@@ -14,6 +14,8 @@ model cliente {
   cpf      String @unique
   telefone String @unique
 
+animais Animal[]
+
   criadoEm DateTime @default(now())
 
   @@map("clientes")
@@ -25,6 +27,8 @@ model Animal {
   raca           String
   especie        String
   datanascimento DateTime
+   clienteId      Int
+  cliente cliente @relation(fields: [clienteId],references: [id])
 
     consultas Consulta[]
 

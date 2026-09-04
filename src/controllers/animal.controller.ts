@@ -2,9 +2,9 @@ import { Request, Response } from 'express';
 import * as animalService from '../services/animal.services';
 
 export async function criar(req: Request, res: Response): Promise<void> {
-  const { nome, raca, especie, datanascimento, } = req.body;
+  const { nome, raca, especie, datanascimento, clienteId } = req.body;
 
-  const animal = await animalService.criarAnimal({nome, raca, especie, datanascimento });
+  const animal = await animalService.criarAnimal({ nome, raca, especie, datanascimento, clienteId });
 
    res.status(201).json(animal);
 }

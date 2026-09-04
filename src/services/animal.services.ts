@@ -7,7 +7,13 @@ const SELECT_ANIMAL_PUBLICO = {
   raca: true,
   especie: true,
   datanascimento: true,
-
+  cliente: {
+    select: {
+      id: true,
+      nome: true,
+      email: true,
+    }
+  }
 } as const;
 
 interface CriarAnimalInput {
@@ -15,6 +21,7 @@ interface CriarAnimalInput {
   raca: string;
   especie: string;
   datanascimento: Date;
+  clienteId: number;
 }
 export async function criarAnimal(dados: CriarAnimalInput) {
    const animalCriado = await prisma.animal.create({
