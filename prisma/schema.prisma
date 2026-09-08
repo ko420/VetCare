@@ -27,6 +27,9 @@ model Animal {
   raca           String
   especie        String
   datanascimento DateTime
+  selvagem        Boolean @default(false)
+  registroLegal    String?
+  porte        String?  @default("Médio")
    clienteId      Int
   cliente cliente @relation(fields: [clienteId],references: [id])
 
@@ -65,12 +68,13 @@ model Consulta {
   dataHorario   DateTime
   status        String   @default("Agendada")
 
+  domiciliar  Boolean  @default(false)
   categoria  CategoriaConsulta @relation(fields: [categoriaId], references: [id])
   animal     Animal            @relation(fields: [animalId], references: [id])
   veterinario Veterinario      @relation(fields: [veterinarioId], references: [id])
 
   prontuario Prontuario?
-
+  @@unique([veterinarioId, dataHorario])
   @@map("consultas")
 }
 
@@ -78,8 +82,9 @@ model Consulta {
 model Prontuario {
   id          Int    @id @default(autoincrement())
    consultaId  Int       @unique
-  diagnostico String
-  prescricao  String
+  diagnostico String?
+  prescricao  String?
+  dataRetorno DateTime?
 
 
   consulta Consulta @relation(fields: [consultaId], references: [id], onDelete: Cascade)

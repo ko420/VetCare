@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import * as consultaService from '../services/consulta.services';
 export async function criar(req: Request, res: Response): Promise<void> {
   const { categoriaId, dataHorario, status, animalId, veterinarioId } = req.body;
-  const consulta = await consultaService.criarConsulta({ categoriaId, dataHorario, status, animalId, veterinarioId });
+  const consulta = await consultaService.criarConsulta({ categoriaId, dataHorario, status, animalId, veterinarioId, domiciliar: req.body.domiciliar });
   res.status(201).json(consulta);
 }
 
@@ -15,7 +15,7 @@ export async function listar(req: Request, res: Response): Promise<void> {
 
 export async function buscarPorId(req: Request, res: Response): Promise<void> {
   const id = Number(req.params.id);
-  const consulta = await consultaService.buscarConsultaPorId(id);
+  const consulta = await consultaService.buscarPorId(id);
   res.status(200).json(consulta);
 }
 

@@ -22,8 +22,17 @@ interface CriarAnimalInput {
   especie: string;
   datanascimento: Date;
   clienteId: number;
+  selvagem?: boolean;
+  porte?: string;
+  registroLegal?: string;
 }
 export async function criarAnimal(dados: CriarAnimalInput) {
+  if (dados.selvagem && !dados.registroLegal) {
+  throw new AppError(
+    'Animais selvagens precisam possuir registro ou autorização legal.',
+    400
+  );
+}
    const animalCriado = await prisma.animal.create({
         data: dados,
         select: SELECT_ANIMAL_PUBLICO,
