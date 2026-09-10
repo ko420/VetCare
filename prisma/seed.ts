@@ -149,8 +149,8 @@ const cliente3 = await prisma.cliente.upsert({
   const joca = await prisma.animal.create({
     data: {
       nome: 'Joca',
-      especie: 'Jabuti-piranga',
-      raca: 'Jabuti',
+      especie: 'Jabuti',
+      raca: 'Jabuti_Piranga',
       selvagem: true,
       porte: 'Pequeno',
       registroLegal: 'Registro Ambiental XYZ123',
@@ -162,8 +162,8 @@ const cliente3 = await prisma.cliente.upsert({
   const loro = await prisma.animal.create({
     data: {
       nome: 'Loro',
-      especie: 'Papagaio-verdadeiro',
-      raca: 'Papagaio',
+      especie: 'Papagaio',
+      raca: 'Papagaio_Verde',
       selvagem: true,
       porte: 'Pequeno',
       registroLegal: 'Registro Ambiental ABC456',
