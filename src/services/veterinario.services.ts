@@ -7,6 +7,8 @@ const SELECT_VETERINARIO_PUBLICO = {
   crmv: true,
   especialidade: true,
   email: true,
+  criadoEm: true,
+  atualizadoEm: true,
 
 } as const;
 

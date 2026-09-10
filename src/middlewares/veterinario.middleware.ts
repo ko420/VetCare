@@ -5,7 +5,7 @@ import { AppError } from './error.middleware';
 
 export function veterinarioMiddleware(
   req: Request,
-  res: Response,
+  _res: Response,
   next: NextFunction
 ): void {
   if (!req.user) {

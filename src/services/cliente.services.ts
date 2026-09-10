@@ -8,6 +8,7 @@ const SELECT_CLIENTE_PUBLICO = {
     telefone: true,
     cpf: true,
     criadoEm: true,
+    atualizadoEm: true,
 } as const;
 
 interface CriarClienteInput {

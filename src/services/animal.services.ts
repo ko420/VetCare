@@ -7,6 +7,8 @@ const SELECT_ANIMAL_PUBLICO = {
   raca: true,
   especie: true,
   datanascimento: true,
+  criadoEm: true,
+  atualizadoEm: true,
   cliente: {
     select: {
       id: true,

@@ -8,6 +8,8 @@ interface CriarConsultaInput {
   veterinarioId: number;
   animalId: number;
   domiciliar?: boolean;
+  criadoEm?: Date;
+  atualizadoEm?: Date;
 }
 interface AtualizarConsultaInput {
   dataHorario?: Date;

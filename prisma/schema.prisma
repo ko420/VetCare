@@ -16,7 +16,8 @@ model cliente {
 
 animais Animal[]
 
-  criadoEm DateTime @default(now())
+criadoEm     DateTime @default(now())
+atualizadoEm DateTime @default(now()) @updatedAt
 
   @@map("clientes")
 }
@@ -30,6 +31,8 @@ model Animal {
   selvagem        Boolean @default(false)
   registroLegal    String?
   porte        String?  @default("Médio")
+  criadoEm     DateTime @default(now())
+atualizadoEm DateTime @default(now()) @updatedAt
    clienteId      Int
   cliente cliente @relation(fields: [clienteId],references: [id])
 
@@ -44,6 +47,8 @@ model Veterinario {
   crmv          String @unique
   especialidade String
   email         String @unique
+criadoEm     DateTime @default(now())
+atualizadoEm DateTime @default(now()) @updatedAt
 
     consultas Consulta[]
 
@@ -54,7 +59,8 @@ model CategoriaConsulta {
   id            Int      @id @default(autoincrement())
   nomeCategoria String
   valorConsulta Float
-
+criadoEm     DateTime @default(now())
+atualizadoEm DateTime @default(now()) @updatedAt
   consultas Consulta[]
 
   @@map("categorias_consultas")
@@ -67,7 +73,8 @@ model Consulta {
   veterinarioId Int
   dataHorario   DateTime
   status        String   @default("Agendada")
-
+criadoEm     DateTime @default(now())
+atualizadoEm DateTime @default(now()) @updatedAt
   domiciliar  Boolean  @default(false)
   categoria  CategoriaConsulta @relation(fields: [categoriaId], references: [id])
   animal     Animal            @relation(fields: [animalId], references: [id])
@@ -85,7 +92,8 @@ model Prontuario {
   diagnostico String?
   prescricao  String?
   dataRetorno DateTime?
-
+criadoEm     DateTime @default(now())
+atualizadoEm DateTime @default(now()) @updatedAt
 
   consulta Consulta @relation(fields: [consultaId], references: [id], onDelete: Cascade)
   @@map("prontuarios")

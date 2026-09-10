@@ -128,7 +128,7 @@ const cliente3 = await prisma.cliente.upsert({
       datanascimento: new Date('2021-05-10'),
       selvagem: false,
       registroLegal: null,
-      clienteId: cliente3.id,
+      clienteId: clienteAleatorio().id,
       porte: 'Médio',
     },
   });
@@ -142,7 +142,7 @@ const cliente3 = await prisma.cliente.upsert({
       selvagem: false,
       registroLegal: null,
       datanascimento: new Date('2022-08-15'),
-      clienteId: cliente2.id,
+      clienteId: clienteAleatorio().id,
     },
   });
 
@@ -155,7 +155,7 @@ const cliente3 = await prisma.cliente.upsert({
       porte: 'Pequeno',
       registroLegal: 'Registro Ambiental XYZ123',
       datanascimento: new Date('2018-03-20'),
-      clienteId: cliente1.id,
+      clienteId: clienteAleatorio().id,
     },
   });
 
@@ -168,7 +168,7 @@ const cliente3 = await prisma.cliente.upsert({
       porte: 'Pequeno',
       registroLegal: 'Registro Ambiental ABC456',
       datanascimento: new Date('2020-01-12'),
-      clienteId: cliente1.id,
+      clienteId: clienteAleatorio().id,
     },
   });
 

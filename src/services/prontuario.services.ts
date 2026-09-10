@@ -7,6 +7,9 @@ const SELECT_PRONTUARIO_PUBLICO = {
   diagnostico: true,
   prescricao: true,
  dataRetorno: true,
+ criadoEm: true,
+ atualizadoEm: true,
+ 
 
 } as const;
 
