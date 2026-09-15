@@ -21,6 +21,32 @@ router.get(
   authMiddleware,
   consultaController.buscarPorId
 );
+
+/**
+ * @openapi
+ * /api/consultas:
+ *   get:
+ *     tags: [Consultas]
+ *     summary: Lista as consultas
+ *     parameters:
+ *       - name: status
+ *         in: query
+ *         required: false
+ *         description: Filtra as consultas pelo status
+ *         schema:
+ *           type: string
+ *           enum: [Agendada, Cancelada, Concluida]
+ *         example: Agendada
+ *     responses:
+ *       200:
+ *         description: Lista de consultas
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Consulta'
+ */
 router.get(
   '/:id',
   authMiddleware,
