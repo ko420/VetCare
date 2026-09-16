@@ -45,4 +45,30 @@ export async function buscarVeterinarioPorId(id: number) {
   }
 
   return veterinario;
+}type AtualizarVeterinarioInput = {
+  nome?: string;
+  crmv?: string;
+  especialidade?: string;
+  email?: string;
+  
+  
+};
+export async function atualizarVeterinario(
+  id: number,
+  dados: AtualizarVeterinarioInput
+) 
+{
+  const veterinario = await prisma.veterinario.findUnique({
+    where: { id },
+  });
+
+  if (!veterinario) {
+    throw new AppError('Veterinário não encontrado.', 404);
+  }
+
+  return prisma.veterinario.update({
+    where: { id },
+    data: dados,
+    select: SELECT_VETERINARIO_PUBLICO,
+  });
 }

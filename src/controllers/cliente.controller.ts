@@ -20,3 +20,18 @@ export async function buscarPorId(req: Request, res: Response): Promise<void> {
 
   res.status(200).json(cliente);
 }
+export async function atualizar(
+  req: Request,
+  res: Response
+): Promise<void> {
+  const id = Number(req.params.id);
+
+  const cliente = await clienteService.atualizarCliente(id, {
+    nome: req.body.nome,
+    cpf: req.body.cpf,
+    email: req.body.email,
+    telefone: req.body.telefone,
+  });
+
+  res.status(200).json(cliente);
+}

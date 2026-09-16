@@ -9,6 +9,9 @@ const SELECT_ANIMAL_PUBLICO = {
   datanascimento: true,
   criadoEm: true,
   atualizadoEm: true,
+  selvagem: true,
+  porte: true,
+  registroLegal: true,
   cliente: {
     select: {
       id: true,
@@ -24,9 +27,9 @@ interface CriarAnimalInput {
   especie: string;
   datanascimento: Date;
   clienteId: number;
-  selvagem?: boolean;
-  porte?: string;
-  registroLegal?: string;
+  selvagem: boolean;
+  porte: string;
+  registroLegal: string;
 }
 export async function criarAnimal(dados: CriarAnimalInput) {
   if (dados.selvagem && !dados.registroLegal) {
@@ -44,12 +47,13 @@ export async function criarAnimal(dados: CriarAnimalInput) {
 }
 
 export async function listarAnimais() {
+  console.log('Listar animais');
+
   return prisma.animal.findMany({
     select: SELECT_ANIMAL_PUBLICO,
     orderBy: { id: 'asc' },
   });
 }
-
 export async function buscarAnimalPorId(id: number) {
   const animal = await prisma.animal.findUnique({
     where: { id },

@@ -21,3 +21,15 @@ export async function buscarPorId(req: Request, res: Response): Promise<void> {
 
   res.status(200).json(animal);
 }
+export async function atualizar(
+  req: Request,
+  res: Response
+): Promise<void> {
+  const id = Number(req.params.id);
+
+  const animal = await animalService.atualizarAnimal(id, {
+    nome: req.body.nome,
+  });
+
+  res.status(200).json(animal);
+}
