@@ -3,8 +3,11 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
-  url      = env("DATABASE_URL")
+  provider = "postgresql"
+
+  url = env("DATABASE_URL")
+
+  directUrl = env("DIRECT_URL")
 }
 
 model cliente {
@@ -90,7 +93,7 @@ model Prontuario {
   id          Int    @id @default(autoincrement())
    consultaId  Int       @unique
   diagnostico String?
-  prescricao  String?
+  prescricao String?
   dataRetorno DateTime?
 criadoEm     DateTime @default(now())
 atualizadoEm DateTime @default(now()) @updatedAt
