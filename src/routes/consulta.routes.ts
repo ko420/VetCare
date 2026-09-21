@@ -14,6 +14,7 @@ const router = Router();
  *     summary: Lista todas as consultas
  *     security:
  *       - bearerAuth: []
+ * 
  *     parameters:
  *       - name: status
  *         in: query

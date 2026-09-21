@@ -172,10 +172,6 @@ router.get('/:id', authMiddleware, animalController.buscarPorId);
  *             schema:
  *               $ref: '#/components/schemas/RespostaErro'
  */
-router.put(
-  '/:id',
-  authMiddleware,
-  animalController.atualizar
-);
+router.put('/:id', authMiddleware,animalController.atualizar);
 
 export default router;

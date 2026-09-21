@@ -3,6 +3,15 @@ import { prisma } from '../src/config/prisma';
 async function main() {
   console.log('Iniciando o seed da base de dados do VetCare...');
 
+ 
+const categoriasExistentes = await prisma.categoriaConsulta.count();
+
+if (categoriasExistentes > 0) {
+  console.log('Banco já populado anteriormente. Nada a fazer.');
+  return;
+}
+
+
   const cliente1 = await prisma.cliente.upsert({
   where: {
     telefone: '11911111111',
