@@ -29,6 +29,9 @@ export async function atualizar(
 
   const animal = await animalService.atualizarAnimal(id, {
     nome: req.body.nome,
+    especie: req.body.especie,
+    raca: req.body.raca,
+    datanascimento: req.body.datanascimento,
   });
 
   res.status(200).json(animal);

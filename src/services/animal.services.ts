@@ -66,3 +66,28 @@ export async function buscarAnimalPorId(id: number) {
 
   return animal;
 }
+type AtualizarAnimalInput = {
+  nome?: string;
+  especie?: string;
+  raca?: string;
+  datanascimento?: Date;
+};
+
+export async function atualizarAnimal(
+  id: number,
+  dados: AtualizarAnimalInput
+) {
+  const animal = await prisma.animal.findUnique({
+    where: { id },
+  });
+
+  if (!animal) {
+    throw new AppError('Animal não encontrado.', 404);
+  }
+
+  return prisma.animal.update({
+    where: { id },
+    data: dados,
+    select: SELECT_ANIMAL_PUBLICO,
+  });
+}

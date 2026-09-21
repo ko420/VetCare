@@ -46,3 +46,27 @@ export async function buscarClientePorId(id: number) {
 
   return cliente;
 }
+type AtualizarClienteInput = {
+  nome?: string;
+  email?: string;
+  telefone?: string;
+  cpf?: string;
+};
+export async function atualizarCliente(
+  id: number,
+  dados: AtualizarClienteInput
+) {
+  const cliente = await prisma.cliente.findUnique({
+    where: { id },
+  });
+
+  if (!cliente) {
+    throw new AppError('Cliente não encontrado.', 404);
+  }
+
+  return prisma.cliente.update({
+    where: { id },
+    data: dados,
+    select: SELECT_CLIENTE_PUBLICO,
+  });
+}
