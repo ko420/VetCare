@@ -16,7 +16,6 @@ model cliente {
   email    String @unique
   cpf      String @unique
   telefone String @unique
-  endenereco String?
 
 animais Animal[]
 
